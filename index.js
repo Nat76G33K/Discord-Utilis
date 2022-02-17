@@ -29,7 +29,7 @@ client.on("messageCreate", async msg => {
 
     if (cmd === "ping") {
 
-      const ping = msg.createdTimestamp - Date.now();
+      const ping = Date.now() - msg.createdTimestamp;
       let i;
       let e;
       const cmt = ["Nice ping :sparkles::sparkles:!", "Rip lags...", "Bruh"]
