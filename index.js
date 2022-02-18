@@ -16,9 +16,7 @@ client.on("ready", async () => {
   } catch (err) {
     console.log(`Failed to start : ${err}`);
   }
-  client.users.cache.get("754229847206658160").createDM().then(dm => {
-    dm.send('Sucessfully logged as ' + client.user.tag + ".");
-  }).catch(err => console.log(err));
+  client.users.cache.get("754229847206658160").createDM().then(dm => dm.send('Sucessfully logged as ' + client.user.tag + ".")).catch(err => console.log(err));
 });
 
 client.on("messageCreate", async msg => {
