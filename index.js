@@ -11,12 +11,11 @@ client.login(process.env.token);
 client.on("ready", async () => {
 
   try {
-    client.guilds.cache.get("939857766397395004").channels.cache.get("939931822039638116").send("Ready to work <@754229847206658160> !");
     client.user.setActivity("Nat76 coding myself.", { type: "WATCHING" });
+    client.users.fetch(user => user.id === "754229847206658160").createDM().then(dm => dm.send('Sucessfully logged as ' + client.user.tag + ".")).catch(err => console.log(err));
   } catch (err) {
     console.log(`Failed to start : ${err}`);
   }
-  client.users.cache.get("754229847206658160").createDM().then(dm => dm.send('Sucessfully logged as ' + client.user.tag + ".")).catch(err => console.log(err));
 });
 
 client.on("messageCreate", async msg => {
