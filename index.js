@@ -1,33 +1,41 @@
-'use strict';
+const { Client, MessageEmbed, Intents, User } = require('discord.js');
+const client = new Client({ intents: [Intents.FLAGS.GUILDS, Intents.FLAGS.GUILD_MESSAGES, Intents.FLAGS.GUILD_MEMBERS] });
 
-const {Client, MessageEmbed, Intents} = require('discord.js');
-const client = new Client({ intents: [Intents.FLAGS.GUILDS, Intents.FLAGS.GUILD_MESSAGES, Intents.FLAGS.GUILD_MEMBERS]});
+//Embed imported here
+const startEmbedImport = require("./Embeds/StartEmbed");
+const PingCMDEmbedImport = require("./Embeds/PingCMDEmbed");
+const YoEmbedImport = require("./Embeds/YoEmbed");
+
 
 var defaultPrefix = "!";
 
-client.login(process.env.token);
+client.login("OTQyODA5ODIwMTgzMDE5NTgw.Ygp6EQ.Y1szAkviD3A0im5gh4gc9y3wgHs");
 
 
 client.on("ready", async () => {
 
+  const embed = startEmbedImport(client.user.username);
+
   try {
     client.user.setActivity("Nat76 coding myself.", { type: "WATCHING" });
-    client.users.fetch(user => user.id === "754229847206658160").createDM().then(dm => dm.send('Sucessfully logged as ' + client.user.tag + ".")).catch(err => console.log(err));
+    client.users.fetch('754229847206658160', false).then((user) => user.send({ embeds: [embed] })).catch(err => console.log(err));
   } catch (err) {
     console.log(`Failed to start : ${err}`);
   }
-});
+
+})
 
 client.on("messageCreate", async msg => {
 
-  if (msg.content.startsWith(defaultPrefix) && msg.channel.type !== "DM" && !msg.author.bot) {
+  const cmd = msg.content.slice(1).toLowerCase();
+  const args = msg.content.slice(cmd.length + 2);
+  const channel = msg.channel;
 
-    const cmd = msg.content.slice(1).toLowerCase();
-    const channel = msg.channel;
+  if (msg.content.startsWith(defaultPrefix) && msg.channel.type !== "DM" && !msg.author.bot) {
 
     if (cmd === "ping") {
 
-      const ping = Date.now() - msg.createdTimestamp;
+      const ping = msg.createdTimestamp - Date.now();
       let i;
       let e;
       const cmt = ["Nice ping :sparkles::sparkles:!", "Rip lags...", "Bruh"]
@@ -43,12 +51,21 @@ client.on("messageCreate", async msg => {
         e = 2;
       }
 
-      const embed = new MessageEmbed().setColor(i).setDescription("Your ping is `" + ping + "ms\`.\n" + cmt[e]);
+      const embed = PingCMDEmbedImport(i, ping, cmt, e);
 
       msg.react("🏓");
-      await channel.send({embeds: [embed]});
+      await channel.send({ embeds: [embed] });
+
+    }
+  } else if (!msg.content.startsWith(defaultPrefix) && msg.channel.type !== "DM" && !msg.author.bot) {
+
+    if (msg.content === "yo" || "YO" || "Yo" || "yO" || "yo!" || "YO!" || "Yo!" || "yO!" || "yo." || "YO." || "Yo." || "yO.") {
+
+      const embed = YoEmbedImport(msg.author);
+      msg.reply({ embeds: [embed] });
 
     }
   }
 
 })
+

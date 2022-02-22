@@ -1,5 +1,19 @@
 {
   "dependencies": {
     "discord.js": "^13.6.0"
-  }
+  },
+  "name": "utilis-project",
+  "description": "Utilis is a Beta Discord bot.",
+  "version": "1.0.0",
+  "main": "index.js",
+  "devDependencies": {},
+  "scripts": {
+    "start": "node index.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "Discord-Utilis"
+  },
+  "author": "Nat76#3958",
+  "license": "ISC"
 }
