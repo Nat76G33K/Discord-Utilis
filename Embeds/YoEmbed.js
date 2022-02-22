@@ -1,10 +1,10 @@
 const { MessageEmbed } = require("discord.js");
 
-module.exports = (botName) => {
+module.exports = (user) => {
 
    const embed = new MessageEmbed({
-      color: [0, 255, 0],
-      title: "Bot opérationnel",
+      color: "RANDOM",
+      description: `Yo ${user} !\nJ'espère que tu vas bien !`,
    });
 
    return embed;
