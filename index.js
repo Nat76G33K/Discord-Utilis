@@ -9,7 +9,7 @@ const YoEmbedImport = require("./Embeds/YoEmbed");
 
 var defaultPrefix = "!";
 
-client.login("OTQyODA5ODIwMTgzMDE5NTgw.Ygp6EQ.Y1szAkviD3A0im5gh4gc9y3wgHs");
+client.login(process.env.token);
 
 
 client.on("ready", async () => {
